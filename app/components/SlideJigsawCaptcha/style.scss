@@ -1,0 +1,142 @@
+@function px2rem($px, $base-font-size: 75px) {
+  @if (unitless($px)) {
+    @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+    @return px2rem($px + 0px);
+  } @else if (unit($px) == rem) {
+    @return $px;
+  }
+  //@return ($px / $base-font-size) * 1rem;
+  @return ($px * 2 / $base-font-size) * 1rem;
+}
+
+.slide-jigsaw-captcha {
+  width: px2rem(345px);
+  margin: auto;
+  position: relative;
+  font-size: px2rem(14px);
+  .panel {
+    border: 1px solid #f1f1f1;
+    margin-bottom: px2rem(15px);
+    position: relative;
+    .bg {
+      display: block;
+      width: 100%;
+      border-radius: px2rem(2px);
+    }
+    .jigsaw {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: auto;
+      height: 100%;
+    }
+    .refresh {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: px2rem(34px);
+      height: px2rem(34px);
+      cursor: pointer;
+      background: url('images/refresh.png') no-repeat top center;
+      background-size: px2rem(34px);
+      -webkit-tap-highlight-color: rgba(0,0,0,0); // 去除点击高亮
+    }
+  }
+  .control {
+    position: relative;
+    height: px2rem(40px);
+    border-radius: px2rem(2px);
+    border: 1px solid #e4e7eb;
+    background-color: #f7f9fa;
+
+    .slided {
+      display: block;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: px2rem(40px);
+      border-radius: px2rem(2px);
+    }
+    .slider {
+      touch-action: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: px2rem(40px);
+      height: 100%;
+      border-radius: px2rem(2px);
+      background-color: #fff;
+      box-shadow: 0 0 px2rem(3px) rgba(0,0,0,.3);
+      //cursor: pointer; // 模拟器上点击会有默认蓝色效果
+      text-align: center;
+      line-height: px2rem(40px);
+      color: #777;
+      background: url(images/arrow.png) no-repeat 50% center;
+      background-size: px2rem(20px);
+      font-size: px2rem(25px);
+    }
+    .tips {
+      text-align: center;
+      line-height: px2rem(40px);
+      color: #45494c;
+    }
+  }
+
+  .slider-moving {
+    .slided {
+      border: 1px solid dodgerblue;
+      border-right: 0;
+      background-color: lightblue;
+      transition: background .2s linear; // 背景变色时增加逐渐变色的效果0.2s
+    }
+    .slider {
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      background: dodgerblue url(images/arrow_white.png) no-repeat 50% center;
+      background-size: px2rem(20px);
+    }
+  }
+
+  .slider-end {
+    .slided {
+      border: 1px solid #f57a7a;
+      border-right: 0;
+      background-color: #fce1e1;
+    }
+    .slider {
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      background: #f57a7a url(images/cross.png) no-repeat 50% center;
+      background-size: px2rem(20px);
+    }
+  }
+
+
+}
+
+
+//[data-dpr="2"] .slide-jigsaw-captcha {
+//  font-size: 14px;
+//  .slider {
+//    font-size: 25px;
+//  }
+//}
+//
+//[data-dpr="1"] .slide-jigsaw-captcha {
+//  font-size: 7px;
+//  .slider {
+//    font-size: 12px;
+//  }
+//}
+//
+//[data-dpr="3"] .slide-jigsaw-captcha {
+//  font-size: 21px;
+//  .slider {
+//    font-size: 37px;
+//  }
+//}
